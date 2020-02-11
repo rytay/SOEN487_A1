@@ -36,10 +36,11 @@ public class Library {
         this.bookList = bookList;
     }
     
-    public void create(String title, String description, String isbn, String author, String publisher){
+    public Book create(String title, String description, String isbn, String author, String publisher){
         
         Book newBook = new Book(sequence.incrementAndGet() ,title, description, isbn, author, publisher);
 	bookList.put(newBook.getId(), newBook);
+	return newBook;
         
     }
     
@@ -49,11 +50,16 @@ public class Library {
     }
     
     //TODO:Should we add a book if not in the hashmap? This implementation does not. 
-    public void update(Book updatedBook){
+    public Book update(Book updatedBook){
 	
-	int id = updatedBook.getId();
-	if(bookList.containsKey(id))
+	Integer id = updatedBook.getId();
+	if(bookList.containsKey(id)){
 	    bookList.put(id, updatedBook);
+	    return updatedBook;
+	}
+	else
+	    return null;
+	    
 	//Uncomment for creating a new book if it does not exist
 	/*else{
 	    this.create(updatedBook)

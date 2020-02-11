@@ -13,7 +13,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author Xavier Vani-Charron
+ * @author Xavier Vani-Charron, Ryan Taylor
  */
 @Entity
 public class Book implements Serializable {
@@ -24,7 +24,7 @@ public class Book implements Serializable {
     private Integer id;
     private String title;
     private String description;
-    private Integer isbn;
+    private String isbn;
     private String author;
     private String publisher;
     
@@ -41,7 +41,7 @@ public class Book implements Serializable {
         this.id=id;
         this.title=title;
         this.description=description;
-        this.isbn = Integer.parseInt(isbn);
+        this.isbn = isbn;
         this.author = author;
         this.publisher=publisher;
     }
@@ -95,11 +95,11 @@ public class Book implements Serializable {
         this.description = description;
     }
 
-    public Integer getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(Integer isbn){
+    public void setIsbn(String isbn){
         this.isbn = isbn;
     }
 

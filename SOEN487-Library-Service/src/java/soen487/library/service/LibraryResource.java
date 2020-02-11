@@ -27,11 +27,11 @@ import javax.ws.rs.core.Response;
  * @author Xavier Vani-Charron, Ryan Taylor
  */
 @Path("books")
+@Produces(MediaType.TEXT_PLAIN)
 public class LibraryResource {
     
     @GET
     @Path("/list")
-    @Produces(MediaType.TEXT_PLAIN)
     public String listAllBooks(){
         
         String output = "";
@@ -44,7 +44,7 @@ public class LibraryResource {
             output = "No books in the Library System.";
         }else{
             for (Book book : allBooks){
-                output += book.toString();
+                output += book.toString()+"\n";
             }
         }
         
@@ -53,14 +53,13 @@ public class LibraryResource {
     
     @GET
     @Path("/{id}")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getBook(@PathParam("id") String id){
+    public String getBook(@PathParam("id") Integer id){
         
         String result = null;
         
         Library lib = Library.getInstance();
         
-        ArrayList<Book> singleBook = lib.read(Integer.parseInt(id));
+        ArrayList<Book> singleBook = lib.read(id);
         
         if(singleBook.isEmpty()){
             result = "No book with the id: "+id;
@@ -73,23 +72,41 @@ public class LibraryResource {
     
     @POST
     @Path("/create")
-//    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void post(@FormParam("title") String title, @FormParam("description") String description, @FormParam("isbn") String isbn, @FormParam("author") String author, @FormParam("publisher") String publisher){
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String post(@FormParam("title") String title, @FormParam("description") String description, @FormParam("isbn") String isbn, @FormParam("author") String author, @FormParam("publisher") String publisher){
         
         Library lib = Library.getInstance();
-        
-        lib.create(description, title, isbn, author, publisher);
+        Book newBook = lib.create(description, title, isbn, author, publisher);
+	return "Successfully added Book "+newBook.toString();
     }
     
     @PUT
     @Path("/edit/{id}")
-    public void editBook(){
-        
+    @Produces(MediaType.TEXT_PLAIN)
+    public String editBook(@PathParam("id") int id, @FormParam("title") String title, @FormParam("description") String description, @FormParam("isbn") String isbn, @FormParam("author") String author, @FormParam("publisher") String publisher){
+        Library lib = Library.getInstance();
+	Book updatedBook = new Book(id , title, description, isbn, author, publisher);
+	Book result = lib.update(updatedBook);
+	if(result == null)
+	    return "Cannot edit Book with id "+id+" because it does not exist";
+	else
+	    return "Successfully edited Book :" + result.toString();
+	    
     }
     
     @DELETE
-    @Path("delete/{id")
-    public void deleteBook(){
+    @Path("delete/{id}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String deleteBook(@PathParam("id") int id){
+	
+	Library lib = Library.getInstance();
+	Book deleted = lib.delete(id);
+
+	//If we want to have a return message
+	if (deleted == null)
+	    return "Book with id "+id+" does not exist.";
+	else
+	    return "Succesfully deleted book: "+deleted.toString();
         
     }
     
