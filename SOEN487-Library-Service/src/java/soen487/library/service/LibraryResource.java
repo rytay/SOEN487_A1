@@ -77,7 +77,7 @@ public class LibraryResource {
         
         Library lib = Library.getInstance();
         Book newBook = lib.create(description, title, isbn, author, publisher);
-	return "Successfully added Book "+newBook.toString();
+	return "Successfully added Book :"+newBook.toString();
     }
     
     @PUT
