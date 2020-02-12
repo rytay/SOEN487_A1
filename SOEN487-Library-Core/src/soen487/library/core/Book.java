@@ -76,7 +76,7 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        return "";
+        return "Book ID: "+id +" Book Title: "+title;
     }
 
     public String getTitle() {
