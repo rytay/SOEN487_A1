@@ -1,1 +1,4 @@
 **/dist/
+/SOEN487-Library-Client/nbproject/private/
+/SOEN487-Library-Client/build/
+/SOEN487-Library-Core/build/
