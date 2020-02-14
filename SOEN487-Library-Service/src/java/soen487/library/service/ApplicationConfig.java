@@ -9,7 +9,7 @@ import javax.ws.rs.core.Application;
 
 /**
  *
- * @author xavie
+ * @author Xavier Vani-Charron
  */
 @javax.ws.rs.ApplicationPath("webservice")
 public class ApplicationConfig extends Application{
@@ -17,12 +17,12 @@ public class ApplicationConfig extends Application{
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
-//        addRestResourceClasses(resources);
+        addRestResourceClasses(resources);
         return resources;
     }
     
-//    private void addRestResourceClasses(Set<Class<?>> resources) {
-//        resources.add(soen487.library.service.LibraryResource.class);
-//    }
+    private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(soen487.library.service.LibraryResource.class);
+    }
     
 }

@@ -8,9 +8,6 @@ package soen487.library.service;
 import java.util.ArrayList;
 import soen487.library.system.Library;
 import soen487.library.core.Book;
-
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -21,7 +18,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 /**
  *
  * @author Xavier Vani-Charron, Ryan Taylor
@@ -29,6 +25,7 @@ import javax.ws.rs.core.Response;
 @Path("books")
 @Produces(MediaType.TEXT_PLAIN)
 public class LibraryResource {
+    
     
     @GET
     @Path("/list")
