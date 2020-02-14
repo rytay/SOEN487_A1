@@ -34,18 +34,19 @@ public class main {
         System.out.println("[7] Quit");
         
         RestClient client = new RestClient();
-        
-        
         while(!quit){
             
             int select = kb.nextInt();
             
           switch(select) {
             case 1:
-              System.out.println("Enter a number associated to one of following options."
-                      + "2 Will list all books that are currently in memory."
-                      + "3 Input a number associated to one of the books to display the book."
-                      + "4 The prompts will ask you to input various information to create a new book.");
+              System.out.println("Enter a number associated to one of following options.\n"
+                      + "2 Will list all books that are currently in memory.\n"
+                      + "3 Input the ID of an existing book to display it.\n"
+                      + "4 The prompts will ask you to input various information to create a new book.\n"
+                      + "5 Input the ID of an existing book to update the various information of the book.\n"
+                      + "6 Input the ID of an existing book to delete from memory.\n"
+                      + "7 Quit the console application.\n");
               break;
             case 2:
               System.out.println("Input was 2");

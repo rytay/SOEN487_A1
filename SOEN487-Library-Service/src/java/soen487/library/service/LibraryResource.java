@@ -50,13 +50,22 @@ public class LibraryResource {
     
     @GET
     @Path("/{id}")
-    public String getBook(@PathParam("id") Integer id){
+    public String getBook(@PathParam("id") String id){
+        
+        int parsed_id;
+        
+        try{
+            parsed_id = Integer.parseInt(id);
+        }
+        catch(NumberFormatException e){
+            return "Please input an integer";
+        }
         
         String result = null;
         
         Library lib = Library.getInstance();
         
-        ArrayList<Book> singleBook = lib.read(id);
+        ArrayList<Book> singleBook = lib.read(parsed_id);
         
         if(singleBook.isEmpty()){
             result = "No book with the id: "+id;
@@ -80,9 +89,19 @@ public class LibraryResource {
     @PUT
     @Path("/edit/{id}")
     @Produces(MediaType.TEXT_PLAIN)
-    public String editBook(@PathParam("id") int id, @FormParam("title") String title, @FormParam("description") String description, @FormParam("isbn") String isbn, @FormParam("author") String author, @FormParam("publisher") String publisher){
+    public String editBook(@PathParam("id") String id, @FormParam("title") String title, @FormParam("description") String description, @FormParam("isbn") String isbn, @FormParam("author") String author, @FormParam("publisher") String publisher){
+        
+        int parsed_id;
+        
+        try{
+            parsed_id = Integer.parseInt(id);
+        }
+        catch(NumberFormatException e){
+            return "Please input an integer";
+        }
+        
         Library lib = Library.getInstance();
-	Book updatedBook = new Book(id , title, description, isbn, author, publisher);
+	Book updatedBook = new Book(parsed_id , title, description, isbn, author, publisher);
 	Book result = lib.update(updatedBook);
 	if(result == null)
 	    return "Cannot edit Book with id "+id+" because it does not exist";
@@ -94,10 +113,19 @@ public class LibraryResource {
     @DELETE
     @Path("delete/{id}")
     @Produces(MediaType.TEXT_PLAIN)
-    public String deleteBook(@PathParam("id") int id){
-	
+    public String deleteBook(@PathParam("id") String id){
+        
+        int parsed_id;
+        
+        try{
+            parsed_id = Integer.parseInt(id);
+        }
+        catch(NumberFormatException e){
+            return "Please input an integer";
+        }
+        
 	Library lib = Library.getInstance();
-	Book deleted = lib.delete(id);
+	Book deleted = lib.delete(parsed_id);
 
 	//If we want to have a return message
 	if (deleted == null)
