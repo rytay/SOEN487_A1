@@ -7,7 +7,11 @@ package soen487.library.client;
 
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Form;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * Jersey REST client generated for REST resource:LibraryResource [books]<br>
@@ -42,12 +46,29 @@ public class RestClient {
         return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
     }
 
-    public String post() throws ClientErrorException {
-        return webTarget.path("create").request(javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED).post(null, String.class);
+    public String post(String title, String des, String isbn, String auth, String pub) throws ClientErrorException {        
+        Form form = new Form();
+        form.param("title", title);
+        form.param("description", des);
+        form.param("isbn", isbn);
+        form.param("author", auth);
+        form.param("publisher", pub);
+        
+        Response response = webTarget.path("create").request().post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED));
+        return response.readEntity(String.class);        
     }
 
-    public String editBook(String id) throws ClientErrorException {
-        return webTarget.path(java.text.MessageFormat.format("edit/{0}", new Object[]{id})).request().put(null, String.class);
+    public String editBook(String id, String title, String des, String isbn, String auth, String pub) throws ClientErrorException {
+        Form form = new Form();
+        form.param("title", title);
+        form.param("description", des);
+        form.param("isbn", isbn);
+        form.param("author", auth);
+        form.param("publisher", pub);
+        
+        Response response = webTarget.path(java.text.MessageFormat.format("edit/{0}", new Object[]{id})).request().put(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED));
+        return response.readEntity(String.class);  
+        //return webTarget.path(java.text.MessageFormat.format("edit/{0}", new Object[]{id})).request().put(null, String.class);
     }
 
     public String listAllBooks() throws ClientErrorException {
