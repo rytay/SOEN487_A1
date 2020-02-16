@@ -82,7 +82,7 @@ public class LibraryResource {
     public String post(@FormParam("title") String title, @FormParam("description") String description, @FormParam("isbn") String isbn, @FormParam("author") String author, @FormParam("publisher") String publisher){
         
         Library lib = Library.getInstance();
-        Book newBook = lib.create(description, title, isbn, author, publisher);
+        Book newBook = lib.create(title,description, isbn, author, publisher);
 	return "Successfully added Book :"+newBook.toString();
     }
     
