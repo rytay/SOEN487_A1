@@ -2,9 +2,9 @@
 
 ## Team Members
 
-* Xavier Vani-Charron 27055838
-* Jonathan Massabni
-* Ryan Taylor
+* Xavier Vani-Charron 27055838 (Service and Core)
+* Jonathan Massabni (Client)
+* Ryan Taylor (Service and Core)
 
 ## Requirements to Run Code
 
